@@ -1,0 +1,6 @@
+{
+    "earthquakes": {
+        "target": "http://localhost:2401",
+        "secure": false
+    }
+}

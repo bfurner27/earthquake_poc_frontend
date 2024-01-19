@@ -1,1 +1,6 @@
-<p>earthquake-list works!</p>
+<section>
+    <div *ngFor="let earthquake of earthquakes">
+        {{earthquake}}
+    </div>
+    <button (click)="load_more()">Load More</button>
+</section>
