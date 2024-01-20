@@ -19,43 +19,70 @@
     }
 }
 
-.earthquake-item-edit {
-    input {
-        width: calc(100% - 32px);
-        padding: 8px 16px;
+.earthquake-item-edit-parent {
+    display: flex;
+    align-items: center;
 
-        font-family: 'Source Sans 3';
-        font-size: 14px;
+    .delete-row {
+        padding: 0px;
 
-        border-top-style: none;
-        border-left-style: none;
-        border-right-style: none;
+        color: red;
 
-        &:focus {
-            border-bottom-color: var(--light-background);
-            outline: 0;
+        &:hover {
+            font-weight: 600;
+            cursor: grab;
+        }
+
+        &:active {
+            font-weight: 600;
+            color: var(--light-background);
         }
     }
 
-    .date {
-        padding-right: 4px;
-        padding-left: 4px;
-        width: calc(100% - 8px);
-    }
+    .earthquake-item-edit {
+        width: calc(100% - 16px);
 
-    .error {
-        border-bottom-color: red;
+        --columnWidth: (100% - (12px * 5)) / 6;
+        grid-template-columns: calc(var(--columnWidth) - 16px) repeat(5, 1fr);
 
-        &:focus {
+        input {
+            width: calc(100% - 32px);
+            padding: 8px 16px;
+
+            font-family: 'Source Sans 3';
+            font-size: 14px;
+
+            border-top-style: none;
+            border-left-style: none;
+            border-right-style: none;
+
+            &:focus {
+                border-bottom-color: var(--light-background);
+                outline: 0;
+            }
+        }
+
+        .date {
+            padding-right: 4px;
+            padding-left: 4px;
+            width: calc(100% - 8px);
+        }
+
+        .error {
             border-bottom-color: red;
-        }
-    }
 
-    &:hover {
-        background-color: unset;
-        cursor: text;
+            &:focus {
+                border-bottom-color: red;
+            }
+        }
+
+        &:hover {
+            background-color: unset;
+            cursor: text;
+        }
     }
 }
+
 
 .hidden {
     display: none;

@@ -6,10 +6,14 @@
             }}
         </div>
     </div>
-    <div [class]="['earthquake-item', 'earthquake-item-edit', isEditMode ? 'visible' : 'hidden']"
-        (keyup.enter)="endEditMode()" (keydown)="handleKeyDown($event)" #earthquakeInput>
-        <input *ngFor="let key of displayKeyOrder" [type]="key === 'date' ? 'date' : 'text'"
-            [class]="[key, formControllers[key].errors ? 'error' : '']" [formControl]="formControllers[key]"
-            (focus)="handleFocus($event, key)" (blur)="handleBlur($event, key)" />
+    <div [class]="['earthquake-item-edit-parent', isEditMode ? 'visible' : 'hidden']">
+        <div class="delete-row" (click)="handleDelete($event)">(-)</div>
+        <div [class]="['earthquake-item', 'earthquake-item-edit']" (keyup.enter)="endEditMode()"
+            (keydown)="handleKeyDown($event)" #earthquakeInput>
+            <input *ngFor="let key of displayKeyOrder" [type]="key === 'date' ? 'date' : 'text'"
+                [class]="[key, formControllers[key].errors ? 'error' : '']" [formControl]="formControllers[key]"
+                (focus)="handleFocus($event, key)" (blur)="handleBlur($event, key)" />
+        </div>
     </div>
+
 </div>

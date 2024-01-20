@@ -12,6 +12,11 @@ export interface EarthquakeUpdateEvent {
   new: Earthquake,
 }
 
+export interface EarthuqakeDeleteEvent {
+  type: 'delete' | 'discard',
+  id?: number;
+}
+
 @Component({
   selector: 'app-earthquake-item',
   standalone: true,
@@ -25,6 +30,7 @@ export class EarthquakeItemComponent {
   @Input({ required: true }) earthquake!: Earthquake;
   @Input() isEditOnly: boolean = false;
   @Output() update: EventEmitter<EarthquakeUpdateEvent> = new EventEmitter<EarthquakeUpdateEvent>();
+  @Output() delete: EventEmitter<EarthuqakeDeleteEvent> = new EventEmitter<EarthuqakeDeleteEvent>();
   @ViewChild('earthquakeEntry') earthquakeEntry!: ElementRef;
   @ViewChild('earthquakeInput') earthquakeInput!: ElementRef;
 
@@ -155,5 +161,20 @@ export class EarthquakeItemComponent {
 
   handleBlur(event: Event, key: string) {
     this.editKey = undefined;
+  }
+
+  handleDelete(event: Event) {
+    if (this.isEditOnly) {
+      const result = confirm('Do you want to discard this new entry');
+      this.delete.emit({ type: 'discard' });
+      this.isEditMode = false;
+      return;
+    }
+
+    const result = confirm('Do you want to delete this existing entry');
+    if (result == true) {
+      this.delete.emit({ type: 'delete', id: this.earthquake.id });
+      this.isEditMode = false;
+    }
   }
 }

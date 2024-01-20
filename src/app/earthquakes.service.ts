@@ -81,11 +81,16 @@ export class EarthquakesService {
   }
 
   create_earthquake(newData: Omit<Omit<Earthquake, 'id'>, 'providerId'>) {
+    let correctDate = newData.date;
+    if (newData.date.length === 10) {
+      correctDate += 'T00:00:00Z';
+    }
+
     const url = this.baseUrl
     this.http.post<{ data: Array<Earthquake> }>(url, {
       data: [{
         providerId: `frontend-${crypto.randomUUID()}`,
-        date: newData.date,
+        date: correctDate,
         depth: newData.depth,
         magnitude: newData.magnitude,
         type: newData.type,
@@ -104,7 +109,18 @@ export class EarthquakesService {
         console.error("was not able to create the entry");
       }
 
-      this.update_notifier()
+      this.update_notifier();
+    })
+  }
+
+  delete_earthquake(id: number) {
+    const url = this.baseUrl + `/${id}`
+    this.http.delete(url).pipe(
+      retry(3),
+      catchError(this.handleError)
+    ).subscribe((_) => {
+      delete this.earthquakes[id];
+      this.update_notifier();
     })
   }
 }

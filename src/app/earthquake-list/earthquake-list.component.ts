@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { EarthquakesService } from '../earthquakes.service';
 import { Earthquake } from '../earthquake';
 import { CommonModule } from '@angular/common';
-import { EarthquakeItemComponent, EarthquakeUpdateEvent } from '../earthquake-item/earthquake-item.component';
+import { EarthquakeItemComponent, EarthquakeUpdateEvent, EarthuqakeDeleteEvent } from '../earthquake-item/earthquake-item.component';
 
 @Component({
   selector: 'app-earthquake-list',
@@ -59,5 +59,13 @@ export class EarthquakeListComponent {
     });
 
     this.isEditRow = false;
+  }
+
+  handle_delete(event: EarthuqakeDeleteEvent) {
+    if (event.type === 'discard') {
+      this.isEditRow = false;
+    } else if (event.type === 'delete' && event.id !== undefined) {
+      this.earthquakeService.delete_earthquake(event.id)
+    }
   }
 }
