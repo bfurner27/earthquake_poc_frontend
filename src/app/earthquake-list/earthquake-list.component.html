@@ -8,8 +8,13 @@
         <div class="depth">Depth</div>
         <div class="type">Type</div>
     </div>
+    <div *ngIf="!isEditRow" class="earthquake-add" (click)="handleAddEarthquake($event)">+ Add Earthquake</div>
+    <app-earthquake-item *ngIf="isEditRow" [isEditOnly]="true" [earthquake]="defaultEarthquake"
+        (update)="handle_create($event)"></app-earthquake-item>
     <app-earthquake-item *ngFor="let earthquake of earthquakes" [earthquake]="earthquake"
         (update)="handle_update($event)">
     </app-earthquake-item>
-    <button (click)="load_more()">Load More</button>
+    <div class="earthquake-load-more-parent">
+        <div class="earthquake-load-more" (click)="load_more()">Load More</div>
+    </div>
 </section>

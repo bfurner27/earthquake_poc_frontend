@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { parseISO, format, parse, formatISO } from 'date-fns';
+import { parseISO, parse, format } from 'date-fns';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,7 @@ export class DateFormatterService {
   }
 
   formatDateISO(date: Date): string {
-    return formatISO(date)
+    // setting the hours to the end of the day so when it tries to convert it it remains the same day
+    return format(date.setHours(23, 59, 59), 'yyyy-MM-dd');
   }
 }

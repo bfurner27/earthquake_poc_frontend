@@ -45,7 +45,6 @@ export class EarthquakesService {
 
   private load_data() {
     const url = this.baseUrl + `?page=${this.currentPage++}`
-    console.error("DATA URL", url)
     this.http.get<EarthquakeDataResponse>(url).pipe(
       retry(3),
       catchError(this.handleError)
@@ -81,5 +80,31 @@ export class EarthquakesService {
     })
   }
 
+  create_earthquake(newData: Omit<Omit<Earthquake, 'id'>, 'providerId'>) {
+    const url = this.baseUrl
+    this.http.post<{ data: Array<Earthquake> }>(url, {
+      data: [{
+        providerId: `frontend-${crypto.randomUUID()}`,
+        date: newData.date,
+        depth: newData.depth,
+        magnitude: newData.magnitude,
+        type: newData.type,
+        latitude: newData.latitude,
+        longitude: newData.longitude,
+      }]
+    }).pipe(
+      retry(3),
+      catchError(this.handleError)
+    ).subscribe((data) => {
+      for (const e of data.data) {
+        this.earthquakes[e.id] = e;
+      }
 
+      if (data.data.length === 0) {
+        console.error("was not able to create the entry");
+      }
+
+      this.update_notifier()
+    })
+  }
 }

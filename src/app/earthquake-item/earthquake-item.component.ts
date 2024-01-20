@@ -23,6 +23,7 @@ export class EarthquakeItemComponent {
   private toIsoDatePipe: ToIsoDatePipe = new ToIsoDatePipe()
 
   @Input({ required: true }) earthquake!: Earthquake;
+  @Input() isEditOnly: boolean = false;
   @Output() update: EventEmitter<EarthquakeUpdateEvent> = new EventEmitter<EarthquakeUpdateEvent>();
   @ViewChild('earthquakeEntry') earthquakeEntry!: ElementRef;
   @ViewChild('earthquakeInput') earthquakeInput!: ElementRef;
@@ -56,6 +57,11 @@ export class EarthquakeItemComponent {
   }
 
   ngOnInit() {
+    if (this.isEditOnly) {
+      this.editKey = 'date';
+      this.setEditMode()
+    }
+
     this.formControllers['date'].setValue(this.toIsoDatePipe.transform(this.earthquake.date));
     this.formControllers['magnitude'].setValue(this.earthquake.magnitude);
     this.formControllers['latitude'].setValue(this.earthquake.latitude);
@@ -88,7 +94,11 @@ export class EarthquakeItemComponent {
 
   endEditMode() {
     const newEarthquake: Earthquake = { ...this.earthquake };
-    newEarthquake.date = this.dateFormatterService.formatDateISO(this.formControllers['date'].value);
+    newEarthquake.date = this.dateFormatterService.formatDateISO(
+      this.dateFormatterService.fromISO(
+        this.formControllers['date'].value,
+      )
+    );
     newEarthquake.magnitude = this.formControllers['magnitude'].value;
     newEarthquake.latitude = this.formControllers['latitude'].value;
     newEarthquake.longitude = this.formControllers['longitude'].value;
@@ -96,7 +106,7 @@ export class EarthquakeItemComponent {
     newEarthquake.type = this.formControllers['type'].value;
 
     if (
-      this.earthquake.date !== newEarthquake.date
+      this.toIsoDatePipe.transform(this.earthquake.date) !== this.toIsoDatePipe.transform(newEarthquake.date)
       || this.earthquake.magnitude !== newEarthquake.magnitude
       || this.earthquake.latitude !== newEarthquake.latitude
       || this.earthquake.longitude !== newEarthquake.longitude

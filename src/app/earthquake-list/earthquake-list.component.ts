@@ -14,6 +14,18 @@ import { EarthquakeItemComponent, EarthquakeUpdateEvent } from '../earthquake-it
 export class EarthquakeListComponent {
   private earthquakeService: EarthquakesService = inject(EarthquakesService)
   earthquakes: Array<Earthquake> = []
+  isEditRow: boolean = false;
+  now: Date = new Date();
+  defaultEarthquake: Earthquake = {
+    date: `${this.now.toISOString().substring(0, 10)}T12:00:00Z`,
+    magnitude: 0,
+    providerId: '',
+    depth: undefined,
+    type: undefined,
+    latitude: 0,
+    longitude: 0,
+    id: 0
+  }
 
   constructor() {
     this.earthquakeService.subscribe().subscribe((data) => {
@@ -27,5 +39,25 @@ export class EarthquakeListComponent {
 
   handle_update(event: EarthquakeUpdateEvent) {
     this.earthquakeService.update_earthquake(event.new)
+  }
+
+  handleAddEarthquake(event: Event) {
+    this.isEditRow = true;
+
+    event.stopPropagation();
+  }
+
+  handle_create(event: EarthquakeUpdateEvent) {
+    const newEntry = event.new;
+    this.earthquakeService.create_earthquake({
+      date: newEntry.date,
+      depth: newEntry.depth,
+      magnitude: newEntry.magnitude,
+      type: newEntry.type,
+      latitude: newEntry.latitude,
+      longitude: newEntry.longitude,
+    });
+
+    this.isEditRow = false;
   }
 }

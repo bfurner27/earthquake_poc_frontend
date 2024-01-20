@@ -13,6 +13,43 @@
     }
 }
 
+.earthquake-add {
+    padding: 12px 16px;
+
+    color: var(--dark-background);
+
+    &:hover {
+        font-weight: 600;
+        cursor: grab;
+    }
+
+    &:active {
+        font-weight: 600;
+        color: var(--light-background)
+    }
+}
+
 .earthquake-table-note {
     font-size: 10px;
+}
+
+
+.earthquake-load-more-parent {
+    display: flex;
+    justify-content: center;
+
+    .earthquake-load-more {
+        color: var(--dark-background);
+        padding: 12px 16px;
+
+        &:hover {
+            font-weight: 600;
+            cursor: grab;
+        }
+
+        &:active {
+            font-weight: 600;
+            color: var(--light-background);
+        }
+    }
 }
