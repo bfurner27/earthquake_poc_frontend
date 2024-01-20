@@ -1,14 +1,15 @@
 <div #earthquakeEntry>
     <div [class]="['earthquake-item', isEditMode ? 'hidden' : 'visible']" (dblclick)="setEditMode()">
-        <div *ngFor="let key of displayKeyOrder" [class]="key" (dblclick)="handleDoubleClick($event)"> {{
+        <div *ngFor="let key of displayKeyOrder" [class]="key" (dblclick)="handleDoubleClick($event, key)"> {{
             key === 'date' ? (formControllers[key].value |
             isoToStandard) : formControllers[key].value
             }}
         </div>
     </div>
     <div [class]="['earthquake-item', 'earthquake-item-edit', isEditMode ? 'visible' : 'hidden']"
-        (keyup.enter)="endEditMode()" #earthquakeInput>
+        (keyup.enter)="endEditMode()" (keydown)="handleKeyDown($event)" #earthquakeInput>
         <input *ngFor="let key of displayKeyOrder" [type]="key === 'date' ? 'date' : 'text'"
-            [class]="[key, formControllers[key].errors ? 'error' : '']" [formControl]="formControllers[key]" />
+            [class]="[key, formControllers[key].errors ? 'error' : '']" [formControl]="formControllers[key]"
+            (focus)="handleFocus($event, key)" (blur)="handleBlur($event, key)" />
     </div>
 </div>

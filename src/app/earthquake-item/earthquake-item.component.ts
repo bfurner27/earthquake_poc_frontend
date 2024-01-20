@@ -28,6 +28,7 @@ export class EarthquakeItemComponent {
   @ViewChild('earthquakeInput') earthquakeInput!: ElementRef;
 
   isEditMode: boolean = false;
+  editKey: string | undefined = undefined;
 
   validateNumber = Validators.pattern(/^\d+(\.\d{1,16})?$/)
   validateNegativeNumber = Validators.pattern(/^-?\d+(\.\d{1,16})?$/)
@@ -65,6 +66,24 @@ export class EarthquakeItemComponent {
 
   setEditMode() {
     this.isEditMode = true;
+
+    const key = this.editKey;
+    if (key !== undefined) {
+      setTimeout(() => {
+        const nativeElement: HTMLElement = this.earthquakeInput.nativeElement;
+
+        // need to get the focus element from the dom somehow (traversing it like this does not seem to work)
+        for (let i = 0; i < nativeElement.childNodes.length; i++) {
+          const child = nativeElement.childNodes[i];
+          const childEl = nativeElement.children[i];
+
+          if (childEl.classList.contains(key)) {
+            (child as HTMLElement).focus();
+            break;
+          }
+        }
+      }, 0)
+    }
   }
 
   endEditMode() {
@@ -90,23 +109,41 @@ export class EarthquakeItemComponent {
     this.isEditMode = false;
   }
 
-  handleDoubleClick(event: Event) {
-    const editKey = (event.target as HTMLElement)?.className;
-    const nativeElement: HTMLElement = this.earthquakeInput.nativeElement;
+  handleDoubleClick(event: Event, key: string) {
+    this.editKey = key;
+  }
 
-    // need to get the focus element from the dom somehow (traversing it like this does not seem to work)
-    // if (editKey !== undefined) {
-    //   for (let i = 0; i < nativeElement.childNodes.length; i++) {
-    //     const child = nativeElement.childNodes[i];
-    //     const childEl = nativeElement.children[i];
+  handleKeyDown(event: KeyboardEvent) {
+    if (event.key == 'z' && event.ctrlKey) {
+      const key = this.editKey
+      if (key !== undefined) {
+        setTimeout(() => {
+          let val: string | number | undefined = '';
+          if (key === 'date') {
+            val = this.toIsoDatePipe.transform(this.earthquake.date);
+          } else if (key === 'magnitude') {
+            val = this.earthquake.magnitude;
+          } else if (key === 'latitude') {
+            val = this.earthquake.latitude;
+          } else if (key === 'longitude') {
+            val = this.earthquake.longitude;
+          } else if (key === 'depth') {
+            val = this.earthquake.depth;
+          } else if (key === 'type') {
+            val = this.earthquake.type
+          }
 
-    //     console.log("THE CHILD OF THE NODE", childEl)
-    //     if (childEl.classList.contains(editKey)) {
-    //       console.log("TRYING TO SET THE FOCUS", child, (child as HTMLElement).focus());
-    //       (child as HTMLElement).focus();
-    //       break;
-    //     }
-    //   }
-    // }
+          this.formControllers[key].setValue(val);
+        }, 0)
+      }
+    }
+  }
+
+  handleFocus(event: Event, key: string) {
+    this.editKey = key;
+  }
+
+  handleBlur(event: Event, key: string) {
+    this.editKey = undefined;
   }
 }
