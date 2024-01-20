@@ -1,0 +1,18 @@
+.earthquake-header {
+    display: grid;
+    // grid-template-columns: 200px repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+
+    background-color: var(--dark-background);
+    color: var(--light-text);
+    font-weight: bold;
+
+    div {
+        padding: 16px 12px;
+    }
+}
+
+.earthquake-table-note {
+    font-size: 10px;
+}

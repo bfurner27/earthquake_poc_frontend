@@ -69,4 +69,17 @@ export class EarthquakesService {
   private update_notifier() {
     this.notifier.next(this.earthquakes.filter((e) => e !== undefined))
   }
+
+  update_earthquake(newData: Earthquake) {
+    const url = this.baseUrl + `/${newData.id}`
+    this.http.put(url, newData).pipe(
+      retry(3),
+      catchError(this.handleError)
+    ).subscribe((_) => {
+      this.earthquakes[newData.id] = newData;
+      this.update_notifier()
+    })
+  }
+
+
 }

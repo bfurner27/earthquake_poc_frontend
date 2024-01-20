@@ -1,11 +1,14 @@
 <main class="main">
   <section class="navigation">
     <div class="navigation-items">
-      <div class="navigation-item" [routerLink]="['/']">Dashboard</div>
-      <div class="navigation-item" [routerLink]="['/earthquake-list']">Earthquake Data</div>
+      <div [class]="['navigation-item', routerUrl === '/' ? 'selected' : '']" [routerLink]="['/']">Dashboard</div>
+      <div [class]="['navigation-item', routerUrl === '/earthquake-list' ? 'selected' : '']"
+        [routerLink]="['/earthquake-list']">Earthquake Data</div>
     </div>
   </section>
-  <section class="body">
-    <router-outlet></router-outlet>
+  <section class="content">
+    <section class="body">
+      <router-outlet></router-outlet>
+    </section>
   </section>
 </main>

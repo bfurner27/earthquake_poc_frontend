@@ -1,0 +1,62 @@
+.earthquake-item {
+    display: grid;
+    // grid-template-columns: 200px repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+
+    font-size: 14px;
+
+    div {
+        padding: 16px 12px;
+    }
+
+    &:hover {
+        background-color: var(--dark-background);
+        color: var(--light-text);
+        font-weight: 500;
+
+        cursor: grab;
+    }
+}
+
+.earthquake-item-edit {
+    input {
+        width: calc(100% - 32px);
+        padding: 8px 16px;
+
+        font-family: 'Source Sans 3';
+        font-size: 14px;
+
+        border-top-style: none;
+        border-left-style: none;
+        border-right-style: none;
+
+        &:focus {
+            border-bottom-color: var(--light-background);
+            outline: 0;
+        }
+    }
+
+    .date {
+        padding-right: 4px;
+        padding-left: 4px;
+        width: calc(100% - 8px);
+    }
+
+    .error {
+        border-bottom-color: red;
+
+        &:focus {
+            border-bottom-color: red;
+        }
+    }
+
+    &:hover {
+        background-color: unset;
+        cursor: text;
+    }
+}
+
+.hidden {
+    display: none;
+}

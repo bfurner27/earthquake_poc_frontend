@@ -1,6 +1,15 @@
 <section>
-    <div *ngFor="let earthquake of earthquakes">
-        {{earthquake}}
+    <div class="earthquake-table-note">*double click to edit, click away to save</div>
+    <div class="earthquake-header">
+        <div class="date">Date</div>
+        <div class="magnitude">Magnitude</div>
+        <div class="latitude">Latitude</div>
+        <div class="longitude">Longitude</div>
+        <div class="depth">Depth</div>
+        <div class="type">Type</div>
     </div>
+    <app-earthquake-item *ngFor="let earthquake of earthquakes" [earthquake]="earthquake"
+        (update)="handle_update($event)">
+    </app-earthquake-item>
     <button (click)="load_more()">Load More</button>
 </section>
