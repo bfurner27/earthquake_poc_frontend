@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject, catchError, retry, throwError } from 'rxjs';
 
-interface TopEarthquakeCountry {
+export interface TopEarthquakeCountry {
   name: string;
   count: number;
 }
@@ -35,7 +35,6 @@ export class CountriesService {
   }
 
   get_most_earthquakes(): Observable<TopEarthquakeCountriesResponse> {
-    console.log("CALLING THE ENDPOINT")
     return this.http.get<TopEarthquakeCountriesResponse>(this.url + '/most-earthquakes').pipe(
       retry(3),
       catchError(this.handleError)

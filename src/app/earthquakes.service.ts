@@ -15,6 +15,22 @@ interface EarthquakeDataResponse {
   data: Array<Earthquake>
 }
 
+export type EarthquakeExtendedWithCountry = Earthquake & { country?: string }
+
+export interface EarthquakeCountByYear {
+  year: number;
+  count: number;
+}
+
+interface EarthquakeStatisticsEntry {
+  countByYear: Array<EarthquakeCountByYear>;
+  topFiveByMagnitude: Array<EarthquakeExtendedWithCountry>;
+}
+
+export interface EarthquakeStatisticsResponse {
+  data: Array<EarthquakeStatisticsEntry>
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -122,5 +138,13 @@ export class EarthquakesService {
       delete this.earthquakes[id];
       this.update_notifier();
     })
+  }
+
+  get_earthquake_statistics(): Observable<EarthquakeStatisticsResponse> {
+    const url = this.baseUrl + '/statistics';
+    return this.http.get<EarthquakeStatisticsResponse>(url).pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
   }
 }

@@ -1,0 +1,12 @@
+.earthquake-over-time-graph {
+    width: 50%;
+
+    .item-header {
+        font-weight: 600;
+    }
+
+    .earthquake-over-time-item {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}

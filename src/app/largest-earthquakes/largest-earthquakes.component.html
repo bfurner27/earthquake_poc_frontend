@@ -1,0 +1,19 @@
+<section>
+    <h1 class="title">Largest Magnitude Earthquakes</h1>
+    <div class="largest-earthquake-item">
+        <div class="header-item">Magnitude</div>
+        <div class="header-item">Date</div>
+        <div class="header-item">Country</div>
+    </div>
+    <div class="largest-earthquake-item" *ngFor="let earthquake of largestEarthquakeList">
+        <div class="magnitude">
+            {{ earthquake.magnitude }}
+        </div>
+
+        <div class="date">
+            {{ earthquake.date | isoToStandard }}
+        </div>
+        <div class="country" *ngIf="earthquake.country">{{earthquake.country}}</div>
+        <div class="country" *ngIf="!earthquake.country">Unable to determine country</div>
+    </div>
+</section>

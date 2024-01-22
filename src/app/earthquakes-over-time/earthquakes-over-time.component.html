@@ -1,0 +1,13 @@
+<section class="earthquakes-over-time">
+    <h1 class="title">Earthquakes Over Time (CHART ADDED IN FUTURE)</h1>
+    <div class="earthquake-over-time-graph" #graphDiv>
+        <div class="earthquake-over-time-item">
+            <div class="year item-header">Year</div>
+            <div class="count item-header">Number of Earthquakes</div>
+        </div>
+        <div class="earthquake-over-time-item" *ngFor="let item of earthquakeCountByYear">
+            <div class="year">{{item.year}}</div>
+            <div class="count">{{item.count}}</div>
+        </div>
+    </div>
+</section>

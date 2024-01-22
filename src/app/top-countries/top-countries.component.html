@@ -1,4 +1,14 @@
 <div>
-    DATA DUMP
-    <div>{{data_dump}}</div>
+    <h1>Countries With Most Earthquakes in last 10 years</h1>
+    <div *ngIf="isLoading">Loading...</div>
+    <div *ngIf="!isLoading" class="earthquakes-frequency-data">
+        <div class="frequency-entry">
+            <div class="header-item">Country</div>
+            <div class="header-item">Total Earthquakes</div>
+        </div>
+        <div class="frequency-entry" *ngFor="let item of data">
+            <div class="name">{{item.name}}</div>
+            <div class="count">{{item.count}}</div>
+        </div>
+    </div>
 </div>

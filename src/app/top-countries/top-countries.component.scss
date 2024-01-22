@@ -1,0 +1,10 @@
+.earthquakes-frequency-data {
+    .frequency-entry {
+        .header-item {
+            font-weight: 600;
+        }
+
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}

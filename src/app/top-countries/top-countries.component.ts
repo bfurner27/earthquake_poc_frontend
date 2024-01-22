@@ -1,20 +1,22 @@
 import { Component } from '@angular/core';
-import { CountriesService } from '../countries.service';
+import { CountriesService, TopEarthquakeCountry } from '../countries.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-top-countries',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './top-countries.component.html',
   styleUrl: './top-countries.component.scss'
 })
 export class TopCountriesComponent {
-  data_dump: string = '';
+  data: Array<TopEarthquakeCountry> = [];
+  isLoading: boolean = true;
 
   constructor(private countriesService: CountriesService) {
     countriesService.get_most_earthquakes().subscribe((data) => {
-      console.error("RECEIVED THE DATA", data)
-      this.data_dump = JSON.stringify(data.data, null, 2);
+      this.data = data.data.slice(0, 10);
+      this.isLoading = false;
     })
   }
 }
