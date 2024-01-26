@@ -1,12 +1,18 @@
-.earthquake-over-time-graph {
-    width: 50%;
+.earthquakes-over-time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-    .item-header {
-        font-weight: 600;
+    font-size: 24px;
+
+    .title {
+
+        font-size: 16px;
+        padding: 0px;
     }
 
-    .earthquake-over-time-item {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+    .chart-area {
+        width: 100%;
     }
 }

@@ -31,7 +31,7 @@ export class CountriesService {
         `Backend returned code ${error.status}, body was: `, error.error);
     }
     // Return an observable with a user-facing error message.
-    return throwError(() => new Error('Something bad happened; please try again later.'));
+    return throwError(() => new Error('Countries endpoint could not be fetched ' + error.statusText));
   }
 
   get_most_earthquakes(): Observable<TopEarthquakeCountriesResponse> {

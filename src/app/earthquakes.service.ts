@@ -56,7 +56,7 @@ export class EarthquakesService {
         `Backend returned code ${error.status}, body was: `, error.error);
     }
     // Return an observable with a user-facing error message.
-    return throwError(() => new Error('Something bad happened; please try again later.'));
+    return throwError(() => new Error('Earthquakes endpoint could not be fetched ' + error.statusText));
   }
 
   private load_data() {
