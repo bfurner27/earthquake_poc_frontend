@@ -3,13 +3,14 @@ import { EarthquakeCountByYear } from '../earthquakes.service';
 
 import { CommonModule } from '@angular/common';
 import { Coordinate, LineChartComponent } from '../line-chart/line-chart.component';
+import { DashboardCardComponent } from "../dashboard-card/dashboard-card.component";
 
 @Component({
   selector: 'app-earthquakes-over-time',
   standalone: true,
-  imports: [CommonModule, LineChartComponent],
   templateUrl: './earthquakes-over-time.component.html',
-  styleUrl: './earthquakes-over-time.component.scss'
+  styleUrl: './earthquakes-over-time.component.scss',
+  imports: [CommonModule, LineChartComponent, DashboardCardComponent]
 })
 export class EarthquakesOverTimeComponent {
   @Input({ required: true }) earthquakeCountByYear: Array<EarthquakeCountByYear> = []

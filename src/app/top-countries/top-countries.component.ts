@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { CountriesService, TopEarthquakeCountry } from '../countries.service';
 import { CommonModule } from '@angular/common';
+import { DashboardCardComponent } from "../dashboard-card/dashboard-card.component";
 
 @Component({
   selector: 'app-top-countries',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './top-countries.component.html',
-  styleUrl: './top-countries.component.scss'
+  styleUrl: './top-countries.component.scss',
+  imports: [CommonModule, DashboardCardComponent]
 })
 export class TopCountriesComponent {
   data: Array<TopEarthquakeCountry> = [];

@@ -3,11 +3,12 @@ import { TopCountriesComponent } from '../top-countries/top-countries.component'
 import { EarthquakesOverTimeComponent } from '../earthquakes-over-time/earthquakes-over-time.component';
 import { LargestEarthquakesComponent } from '../largest-earthquakes/largest-earthquakes.component';
 import { EarthquakeCountByYear, EarthquakeExtendedWithCountry, EarthquakesService } from '../earthquakes.service';
+import { DashboardCardComponent } from '../dashboard-card/dashboard-card.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [TopCountriesComponent, EarthquakesOverTimeComponent, LargestEarthquakesComponent],
+  imports: [TopCountriesComponent, EarthquakesOverTimeComponent, LargestEarthquakesComponent, DashboardCardComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })

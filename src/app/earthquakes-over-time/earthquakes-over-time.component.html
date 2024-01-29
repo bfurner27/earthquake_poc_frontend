@@ -1,7 +1,10 @@
-<section class="earthquakes-over-time">
-    <h1 class="title">Earthquakes Over Time</h1>
-    <div class="chart-area">
-        <app-line-chart [coordinates]="coordinates" yTitle="Earthquake's" xTitle="Year's"></app-line-chart>
+<app-dashboard-card>
+    <div title>Earthquakes Over Time</div>
+    <div body>
+        <section class="earthquakes-over-time">
+            <div class="chart-area">
+                <app-line-chart [coordinates]="coordinates" yTitle="Earthquake's" xTitle="Year's"></app-line-chart>
+            </div>
+        </section>
     </div>
-
-</section>
+</app-dashboard-card>
