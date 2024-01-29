@@ -10,9 +10,9 @@ export interface Coordinate {
 @Component({
   selector: 'app-line-chart',
   standalone: true,
-  imports: [],
   templateUrl: './line-chart.component.html',
-  styleUrl: './line-chart.component.scss'
+  styleUrl: './line-chart.component.scss',
+  imports: []
 })
 export class LineChartComponent {
   @Input({ required: true }) coordinates!: Array<Coordinate>;
