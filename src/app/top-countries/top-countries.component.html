@@ -3,9 +3,10 @@
     <div body>
         <div class="earthquakes-frequency-data">
             <div class="frequency-entry">
-                <div class="header-item">Country</div>
-                <div class="header-item">Total Earthquakes</div>
+                <div class="header-item name">Country</div>
+                <div class="header-item count">Total</div>
             </div>
+            <div class="divider-line"></div>
             <div class="frequency-entry" *ngFor="let item of data">
                 <div class="name">{{item.name}}</div>
                 <div class="count">{{item.count}}</div>
