@@ -1,8 +1,7 @@
-<app-dashboard-card>
+<app-dashboard-card [isLoading]="isLoading">
     <div title>Most Earthquakes (Last 10 Years)</div>
     <div body>
-        <div *ngIf="isLoading">Loading...</div>
-        <div *ngIf="!isLoading" class="earthquakes-frequency-data">
+        <div class="earthquakes-frequency-data">
             <div class="frequency-entry">
                 <div class="header-item">Country</div>
                 <div class="header-item">Total Earthquakes</div>
