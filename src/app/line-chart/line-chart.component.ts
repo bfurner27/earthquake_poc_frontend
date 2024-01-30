@@ -53,6 +53,7 @@ export class LineChartComponent {
       title: this.title,
       font: {
         family: 'Source Sans 3',
+        size: 12,
       },
       margin: {
         t: 0,
@@ -61,17 +62,24 @@ export class LineChartComponent {
         r: 0,
       },
       xaxis: {
-        title: this.xTitle,
-        font: {
-          family: 'Source Sans 3',
+        gridcolor: '#DCF2F1',
+        title: {
+          text: this.xTitle,
+          font: {
+            family: 'Roboto'
+          }
         }
       },
       yaxis: {
-        title: this.yTitle,
-        font: {
-          family: 'Source Sans 3',
+        gridcolor: '#DCF2F1',
+        title: {
+          text: this.yTitle,
+          font: {
+            family: 'Roboto',
+          }
         }
-      }
+      },
+      colorway: ['#7FC7D9'],
     };
 
     let config = {

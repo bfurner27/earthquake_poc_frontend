@@ -5,6 +5,20 @@
         }
 
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+
+        font-size: 20px;
+
+        .count {
+            text-align: right;
+        }
+    }
+
+    .divider-line {
+        height: 1px;
+        width: 100%;
+        background-color: var(--dark-background);
+
+        margin: 4px 0px 8px 0px;
     }
 }
