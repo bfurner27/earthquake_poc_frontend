@@ -3,6 +3,9 @@
         <ng-content select="[title]"></ng-content>
     </div>
     <div class="body">
-        <ng-content select="[body]"></ng-content>
+        <ng-content *ngIf="!isLoading" select="[body]"></ng-content>
+        <div *ngIf="isLoading === true" class="loading-state">
+            <div class="loading-progress"><mat-spinner diameter="32"></mat-spinner></div>
+        </div>
     </div>
 </div>

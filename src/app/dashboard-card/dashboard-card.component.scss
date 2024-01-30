@@ -32,5 +32,15 @@
         height: 100%;
     }
 
+    .loading-state {
+        display: flex;
+        justify-content: center;
 
+        .loading-progress {
+            width: 32px;
+            height: 32px;
+
+            --mdc-circular-progress-active-indicator-color: var(--dark-background);
+        }
+    }
 }
